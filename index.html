@@ -10,11 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /*
-        ========================================
-        GENERAL & ANIMATED BACKGROUND
-        ========================================
-        */
         :root {
             --glow-color-1: hsl(200, 100%, 50%);
             --glow-color-2: hsl(280, 100%, 50%);
@@ -38,7 +33,6 @@
             background-color: #111;
             color: #fff;
             overflow: hidden;
-            /* Hide the parts of the glow that go off-screen */
         }
 
         .background-glow {
@@ -100,11 +94,6 @@
             }
         }
 
-        /*
-        ========================================
-        THE CARD - GLASSMORPHISM & 3D TILT
-        ========================================
-        */
         .card {
             width: 90%;
             max-width: 450px;
@@ -117,22 +106,14 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             text-align: center;
             transform-style: preserve-3d;
-            /* This is key for the 3D effect */
             transition: transform 0.1s linear;
-            /* Smooths the mouse movement */
             position: relative;
         }
 
         .card-content {
             transform: translateZ(20px);
-            /* Pushes the content "forward" in 3D space */
         }
 
-        /*
-        ========================================
-        CONTENT STYLING
-        ========================================
-        */
         .profile-image-placeholder {
             width: 130px;
             height: 130px;
@@ -145,10 +126,8 @@
             font-size: 0.9rem;
             font-weight: 300;
             color: rgba(255, 255, 255, 0.7);
-            /* To replace with your image, just remove the text inside and set a background-image URL */
         }
 
-        /* Uncomment this and add your image URL */
 
         .profile-image-placeholder {
             background-image: url('https://avatars.githubusercontent.com/u/89827995?v=4');
@@ -195,34 +174,26 @@
     </div>
 
     <script>
-        // This JavaScript adds the 3D tilt "wow" effect
         const card = document.getElementById('interactive-card');
-        const tiltStrength = 15; // How much the card tilts. Lower for a more subtle effect.
-
-        // Function to handle the mouse movement
+        const tiltStrength = 15;
         function handleMouseMove(e) {
             const rect = card.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
 
-            // Get mouse position relative to the card's center
             const mouseX = e.clientX - rect.left - width / 2;
             const mouseY = e.clientY - rect.top - height / 2;
 
-            // Calculate rotation values
             const rotateY = (mouseX / (width / 2)) * tiltStrength;
             const rotateX = -(mouseY / (height / 2)) * tiltStrength;
 
-            // Apply the transformation
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         }
 
-        // Function to reset the card's position when the mouse leaves
         function handleMouseLeave() {
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
         }
 
-        // Add event listeners
         document.body.addEventListener('mousemove', handleMouseMove);
         document.body.addEventListener('mouseleave', handleMouseLeave);
 
